@@ -1,18 +1,19 @@
 class Solution:
     def reverseVowels(self, s: str) -> str:
-        split_string = list(s.strip(""))
+        word = list(s.strip(""))
         vowels = ['a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U']
+        start = 0
+        end = len(word)-1
 
+        # Start loop that ends when pointers meet in the  middel
+        while start < end:
+            while start < end and word[start] not in vowels:
+                start += 1
+            while start < end and word[end] not in vowels:
+                end -= 1
+            word[start], word[end] = word[end], word[start]
 
-        ram_vowels = []
-        ram_indexes = []
+            start += 1
+            end -= 1
 
-        for index, item in enumerate(split_string):
-            if item in vowels:
-                ram_vowels.insert(0, item)
-                ram_indexes.append(index)
-
-        for index, item in enumerate(ram_indexes):
-            split_string[item] = ram_vowels[index]
-        result = ''.join(split_string)
-        return result
+        return(''.join(word))
